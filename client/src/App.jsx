@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 //functions
 import { getTest } from './functions/test';
+
 function App() {
   const [data, setData] = useState("Hello World!");
   useEffect(() => {
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>(data))</h1>
+      <h1>(data)</h1>
     </div>
   );
 }
