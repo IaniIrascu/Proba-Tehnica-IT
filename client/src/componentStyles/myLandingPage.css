@@ -3,7 +3,7 @@
     background-size: 130%;
     background-position: 0 -70px;
     background-attachment: scroll;
-    min-height: 160vh;
+    min-height: 330vh;
     display: flex;
     flex-direction: column;
 }

@@ -1,7 +1,13 @@
 import logo from "../pngs/logoPollIt.png";
 import '../componentStyles/myNavbar.css';
+import { useState, useRef, useEffect } from "react";
 
-function Navbar() {
+function Navbar( { onRegisterClick, onLoginClick }) {
+
+  const onRegisterClickRef = useRef(null);
+  const onLoginClickRef = useRef(null);
+
+
     return (
       <nav className="navbar navbar-expand-lg"
       style={
@@ -13,8 +19,12 @@ function Navbar() {
           <img src={logo}/>
         </a>
         <div className="navbar-nav ml-auto" id="navbarSupportedContent">
-          <a className="nav-link navbarTextStyle" href="#login" >Login      </a>
-          <a className="nav-link navbarTextStyle" href="#register" >     Register</a>
+          <a className="nav-link navbarTextStyle"> 
+          <button>Login</button> 
+          </a>
+          <a className="nav-link navbarTextStyle"> 
+          <button onClick={onRegisterClick} ref={onRegisterClickRef}> Register </button>
+          </a>
         </div>
       </nav>
     );
