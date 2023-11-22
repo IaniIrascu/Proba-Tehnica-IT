@@ -1,0 +1,36 @@
+.backgroundStyle {
+    background-image: url('../pngs/landingPageBg.png');
+    background-size: 130%;
+    background-position: 0 -70px;
+    background-attachment: scroll;
+    min-height: 160vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.stickyNavbar {
+    position: sticky;
+    top: 0px;
+    display: flex;
+  }
+
+.textBoxTestoasaContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 200px;
+    align-items: center;
+  }
+
+.imagineTestoasa {
+    width: 70%;
+}
+
+.textBoxStyle {
+    width: 38%;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+  }
+

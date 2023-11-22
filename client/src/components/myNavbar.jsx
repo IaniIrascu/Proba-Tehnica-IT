@@ -1,10 +1,14 @@
-import logo from "../logoPollIt.png";
+import logo from "../pngs/logoPollIt.png";
 import '../componentStyles/myNavbar.css';
 
 function Navbar() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light" 
-      style={{ backgroundColor: '#FFFFFF' ,  boxShadow: "0 0.3px 13px #021B2C"}}>
+      <nav className="navbar navbar-expand-lg"
+      style={
+        { backgroundColor: '#FFFFFF' ,  
+        boxShadow: "0 0.3px 13px #021B2C" ,
+        width: "100%"}}>
+
         <a className="navbar-brand navbarImg" href="#">
           <img src={logo}/>
         </a>

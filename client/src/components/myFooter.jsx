@@ -1,7 +1,7 @@
 import "../componentStyles/myFooter.css"
-import logoInsta from "../logoInsta.png"
-import logoFB from "../logoFB.png"
-import logoTwitch from "../logoTwitch.png"
+import logoInsta from "../pngs/logoInsta.png"
+import logoFB from "../pngs/logoFB.png"
+import logoTwitch from "../pngs/logoTwitch.png"
 
 function Footer () {
     
