@@ -1,0 +1,31 @@
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  height: 100px;
+  width: 100%;
+  align-items: center;
+}
+
+
+.myFooter {
+  background-color: #FF1F66;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+}
+
+.footerImage {
+  max-width: 100%;
+  max-height: 100%;
+  margin-right: 90px;
+  margin-left: 90px;
+  height: 60px;
+  width: auto;
+  align-items: center;
+}

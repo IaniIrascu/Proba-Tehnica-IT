@@ -1,0 +1,16 @@
+.navbarTextStyle {
+    color: #04395E !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26.63px;
+    margin-left: 25px;
+    margin-right: 20px;
+    align-items: center;
+  }
+
+.navbarImg {
+    margin-left: 15px;
+    margin-bottom: 5px;
+    size: auto;
+}
