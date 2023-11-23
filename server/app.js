@@ -1,9 +1,12 @@
 const express = require('express')
+const cors = require('cors');
 const { connectToDb, getDb } = require('./db.js')
 const { ObjectId } = require('mongodb')
 
-//init app
+//init app and middleware
 const app = express()
+app.use(express.json())
+app.use(cors());
 
 //db connection
 let db
@@ -18,7 +21,7 @@ connectToDb((err) => {
 })
 
 //routes
-app.get('/Users', (req, res) => {
+app.get('/users', (req, res) => {
     let users = []
 
     db.collection('users')
@@ -48,4 +51,17 @@ app.get('/users/:id', (req, res) => {
     } else {
         res.status(500).json({error: 'not a valid id'})
     }
+})
+
+app.post('/users', (req, res) => {
+    const user = { email: req.body.email, password: req.body.password }
+
+    db.collection('users')
+        .insertOne(user)
+        .then(result => {
+            res.status(201).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({err:'could not create doc'})
+        })
 })
