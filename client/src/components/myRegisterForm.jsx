@@ -43,7 +43,7 @@ function RegisterForm() {
             
             console.log('Form submitted successfully');
             e.preventDefault()
-            fetch('http://localhost:3000/register', {
+            fetch('http://localhost:3000/users', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
@@ -57,7 +57,7 @@ function RegisterForm() {
     }
     
     useEffect(() => {
-        fetch('http://localhost:3000/register')
+        fetch('http://localhost:3000/users')
 
         .then(res => {
             return res.json()

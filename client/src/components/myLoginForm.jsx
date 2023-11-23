@@ -18,12 +18,14 @@ function LoginForm() {
             const data = await response.json();
       
             setIsValidCredentials(data.validCredentials);
-            if (!data.validCredentials) {
-              setErrorMessage(data.error);
+            if (data.validCredentials) {
+                window.alert('Credentials are correct!');
+            } else {
+                window.alert('Credentials are incorrect. Retry login!');
+                setErrorMessage(data.error);
             }
           } catch (error) {
             console.error('Error checking credentials:', error);
-            alert('Error checking credentials');
           }
     }
 
