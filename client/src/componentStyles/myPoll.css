@@ -1,0 +1,23 @@
+
+.divParinte {
+    display: flex;
+    flex-direction: row;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.myPerfectPoll {
+    background-color: #FFFFFF;
+    width: 650px;
+    height: 700px;
+    margin-left: 8%;
+    margin-right: 8%;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+}
+
+.textStyle {
+    margin-left: 20px;
+    margin-top: 30px;
+    font-size: 30px;
+}

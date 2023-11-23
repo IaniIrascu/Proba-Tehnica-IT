@@ -4,6 +4,7 @@ import Footer from "./myFooter";
 import testoasa from "../pngs/testoasa.png"
 import Popup from "./myPopup";
 import { useState, useRef, useEffect } from "react";
+import Poll from "./myPoll";
 
 
 const textBox="Opiniile sunt mai importante ca niciodată. \
@@ -50,9 +51,11 @@ function LandingPage () {
                 <p className="textBoxStyle"> {textBox} </p>
                 <img className="imagineTestoasa" src={testoasa}/>
             </div>
-
+            <div>
+                <Poll/>
+            </div>
             <div style={{marginTop: "auto"}}>            
-                    <Footer/>
+                <Footer/>
             </div>
         </div>
     );
