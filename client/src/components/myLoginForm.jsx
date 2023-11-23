@@ -5,24 +5,10 @@ function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleCreateAccount = async (e) => {
-        e.preventDefault();
-        let result = await fetch(
-        'http://localhost:5000/Login', {
-            method: "post",
-            body: JSON.stringify({ password, email }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        result = await result.json();
-        console.warn(result);
-        if (result) {
-            alert("Data saved succesfully");
-            setPassword("");
-            setEmail("");
-        }
+    const handleLogin = () => {
+
     }
+
     return (
             <form>
                 <label className="textRegisterLogin">
@@ -43,7 +29,8 @@ function LoginForm() {
                 <button 
                 className="createAccountButton"
                 type="submit"
-                onClick={handleCreateAccount}> Create account
+                onClick={handleLogin}
+                style={{marginTop:"150px"}}> Login
                 </button>
                 </label>
             </form>

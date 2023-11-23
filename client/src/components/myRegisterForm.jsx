@@ -9,27 +9,11 @@ function RegisterForm() {
 
 
     const handleCreateAccount = async (e) => {
-        e.preventDefault();
-        let result = await fetch(
-        'http://localhost:5000/register', {
-            method: "post",
-            body: JSON.stringify({ password, email }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        result = await result.json();
-        console.warn(result);
-        if (result) {
-            alert("Data saved succesfully");
-            setPassword("");
-            setConfPasswd("");
-            setEmail("");
-        }
+
     }
     return (
             <form>
-                <label className="registerText">
+                <label className="textRegisterLogin">
                     Register
                 <input 
                 className="formField"

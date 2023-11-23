@@ -13,7 +13,8 @@ function Navbar( { onRegisterClick, onLoginClick }) {
       style={
         { backgroundColor: '#FFFFFF' ,  
         boxShadow: "0 0.3px 13px #021B2C" ,
-        width: "100%"}}>
+        width: "100%",
+        zIndex: "100"}}>
 
         <a className="navbar-brand navbarImg" href="#">
           <img src={logo}/>

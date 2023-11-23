@@ -12,9 +12,11 @@ showLoginPopup, closeLoginPopup }) {
     const showHideClassNameLogin = showLoginPopup ? 'popup display-block' 
     : 'popup display-none';  
   
-    return (
-      <div>
+    const showHide = (showLoginPopup || showRegisterPopup) ?
+    'popup display-block' : 'popup display-none';
 
+    return (
+      <div className={showHide}>
       <div className={showHideClassNameRegister}>
         <section className="popup-main">
 
@@ -22,7 +24,7 @@ showLoginPopup, closeLoginPopup }) {
         style={{display:"flex",
         justifyContent:"end",
         width:"100%"}}>
-          <button onClick={closeRegisterPopup}>
+          <button>
             <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
           </button>
         </div>
