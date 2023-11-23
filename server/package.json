@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Backend pentru proba tehnica",
-  "main": "proba.js",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon proba.js",
     "test": "echo \"Error: no test specified\" && exit 1"

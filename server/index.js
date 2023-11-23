@@ -17,6 +17,22 @@ mongoose
     .then(() => console.log("DB connected"))
     .catch((err) => console.log("DB connection error", err));
 
+
+//user schema
+const UserSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+});
+const User = mongoose.model('users', UserSchema);
+User.createIndexes();
+
 // middleware
 app.use (morgan("dev"));
 app.use(cors({origin: true, credentials: true}));

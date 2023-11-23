@@ -12,6 +12,10 @@
     background-color: transparent;
   }
 
+  button:hover {
+    opacity: 0.6;
+  }
+
 .navbarImg {
     margin-left: 15px;
     margin-bottom: 5px;

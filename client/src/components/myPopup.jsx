@@ -1,4 +1,6 @@
 import "../componentStyles/myPopup.css"
+import closeButton from "../pngs/closeButton.png"
+import RegisterForm from "./myRegisterForm";
 
 function Popup({ handleClose, show }) {
     
@@ -8,8 +10,16 @@ function Popup({ handleClose, show }) {
     return (
       <div className={showHideClassName}>
         <section className="popup-main">
-          Hai ba
-          <button onClick={handleClose}>Close</button>
+
+        <div
+        style={{display:"flex",
+        justifyContent:"end",
+        width:"100%"}}>
+          <button onClick={handleClose}>
+            <img onClick={handleClose} className="closeButton" src={closeButton}/>
+          </button>
+        </div>
+          <RegisterForm/>
         </section>
       </div>
     );
