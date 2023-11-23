@@ -20,10 +20,12 @@ function Navbar( { onRegisterClick, onLoginClick }) {
         </a>
         <div className="navbar-nav ml-auto" id="navbarSupportedContent">
           <a className="nav-link navbarTextStyle"> 
-          <button>Login</button> 
+          <button onClick={onLoginClick} 
+          ref={onLoginClickRef}> Login</button> 
           </a>
           <a className="nav-link navbarTextStyle"> 
-          <button onClick={onRegisterClick} ref={onRegisterClickRef}> Register </button>
+          <button onClick={onRegisterClick} 
+          ref={onRegisterClickRef}> Register</button>
           </a>
         </div>
       </nav>

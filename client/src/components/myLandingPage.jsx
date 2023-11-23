@@ -14,6 +14,7 @@ nevoile și dorințele acesteia."
 function LandingPage () {
 
     const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+    const [showLoginPopup, setShowLoginPopup] = useState(false);
 
     const handleRegisterClick = () => {
         setShowRegisterPopup(true);
@@ -23,11 +24,27 @@ function LandingPage () {
         setShowRegisterPopup(false);
       };
 
+      const handleLoginClick = () => {
+        setShowLoginPopup(true);
+      }
+
+      const handleCloseLoginPopup = () => {
+        setShowLoginPopup(false);
+      }
+
     return (
         <div className="backgroundStyle" >
             <div className="stickyNavbar">            
-                <Navbar onRegisterClick={handleRegisterClick}/>
-                <Popup show={showRegisterPopup} handleClose={handleCloseRegisterPopup} /> 
+                <Navbar 
+                onRegisterClick={handleRegisterClick}
+                onLoginClick={handleLoginClick}/>
+
+                <Popup 
+                showRegisterPopup={showRegisterPopup} 
+                closeRegisterPopup={handleCloseRegisterPopup} 
+                showLoginPopup={showLoginPopup}
+                closeLoginPopup={handleCloseLoginPopup}
+                /> 
             </div>
             <div className="textBoxTestoasaContainer">
                 <p className="textBoxStyle"> {textBox} </p>

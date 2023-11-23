@@ -1,27 +1,50 @@
 import "../componentStyles/myPopup.css"
 import closeButton from "../pngs/closeButton.png"
 import RegisterForm from "./myRegisterForm";
+import LoginForm from "./myLoginForm";
 
-function Popup({ handleClose, show }) {
+function Popup({ closeRegisterPopup, showRegisterPopup,
+showLoginPopup, closeLoginPopup }) {
     
-    const showHideClassName = show ? 'popup display-block' 
+    const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
     : 'popup display-none';
+
+    const showHideClassNameLogin = showLoginPopup ? 'popup display-block' 
+    : 'popup display-none';  
   
     return (
-      <div className={showHideClassName}>
+      <div>
+
+      <div className={showHideClassNameRegister}>
         <section className="popup-main">
 
         <div
         style={{display:"flex",
         justifyContent:"end",
         width:"100%"}}>
-          <button onClick={handleClose}>
-            <img onClick={handleClose} className="closeButton" src={closeButton}/>
+          <button onClick={closeRegisterPopup}>
+            <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
           </button>
         </div>
           <RegisterForm/>
         </section>
       </div>
+      <div className={showHideClassNameLogin}>
+        <section className="popup-main">
+
+          <div
+          style={{display:"flex",
+          justifyContent:"end",
+          width:"100%"}}>
+            <button onClick={closeLoginPopup}>
+              <img onClick={closeLoginPopup} className="closeButton" src={closeButton}/>
+            </button>
+          </div>
+          <LoginForm/>
+        </section>
+      </div>
+    </div>
+
     );
   }
   
