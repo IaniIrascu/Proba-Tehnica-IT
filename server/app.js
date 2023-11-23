@@ -2,11 +2,13 @@ const express = require('express')
 const cors = require('cors');
 const { connectToDb, getDb } = require('./db.js')
 const { ObjectId } = require('mongodb')
+const jwt = require('jsonwebtoken')
+const bcrypt = require ('bcrypt')
 
 //init app and middleware
 const app = express()
 app.use(express.json())
-app.use(cors());
+app.use(cors())
 
 //db connection
 let db
@@ -53,15 +55,42 @@ app.get('/users/:id', (req, res) => {
     }
 })
 
-app.post('/users', (req, res) => {
-    const user = { email: req.body.email, password: req.body.password }
+app.post('/register', async (req, res) => {
+    const { email, password } = req.body;
 
-    db.collection('users')
-        .insertOne(user)
-        .then(result => {
-            res.status(201).json(result)
-        })
-        .catch(err => {
-            res.status(500).json({err:'could not create doc'})
-        })
-})
+    try {
+        // Hash the password before storing it in the database
+        const hashedPassword = await bcrypt.hash(password, 10);
+    
+        // Save the user with the hashed password
+        await db.collection('users').insertOne({ email, password: hashedPassword });
+    
+        res.json({ success: true });
+      } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    });
+
+app.post('/check-credentials', async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      const user = await db.collection('users').findOne({ email });
+  
+      if (user) {
+        const passwordMatch = await bcrypt.compare(password, user.password);
+  
+        if (passwordMatch) {
+          res.json({ validCredentials: true });
+        } else {
+          res.json({ validCredentials: false, error: 'Incorrect password' });
+        }
+      } else {
+        res.json({ validCredentials: false, error: 'Email not found' });
+      }
+    } catch (error) {
+      console.error('Error checking credentials:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });

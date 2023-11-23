@@ -6,8 +6,6 @@ import { useRef } from "react";
 
 function Popup({ closeRegisterPopup, showRegisterPopup,
 showLoginPopup, closeLoginPopup}) {
-
-    const onClickCloseRef = useRef(null)
     
     const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
     : 'popup display-none';
@@ -28,7 +26,7 @@ showLoginPopup, closeLoginPopup}) {
         justifyContent:"end",
         width:"100%"}}>
           <button>
-            <img onClick={closeRegisterPopup} ref={onClickCloseRef} className="closeButton" src={closeButton}/>
+            <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
           </button>
         </div>
           <RegisterForm/>
