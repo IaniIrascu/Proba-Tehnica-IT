@@ -54,3 +54,13 @@ input::placeholder {
     background-color: #FFFFFF;
     opacity: 0.9;
 }
+
+.textError {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-top: 5px;
+}

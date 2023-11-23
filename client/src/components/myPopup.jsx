@@ -2,9 +2,12 @@ import "../componentStyles/myPopup.css"
 import closeButton from "../pngs/closeButton.png"
 import RegisterForm from "./myRegisterForm";
 import LoginForm from "./myLoginForm";
+import { useRef } from "react";
 
 function Popup({ closeRegisterPopup, showRegisterPopup,
-showLoginPopup, closeLoginPopup }) {
+showLoginPopup, closeLoginPopup}) {
+
+    const onClickCloseRef = useRef(null)
     
     const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
     : 'popup display-none';
@@ -25,7 +28,7 @@ showLoginPopup, closeLoginPopup }) {
         justifyContent:"end",
         width:"100%"}}>
           <button>
-            <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
+            <img onClick={closeRegisterPopup} ref={onClickCloseRef} className="closeButton" src={closeButton}/>
           </button>
         </div>
           <RegisterForm/>
