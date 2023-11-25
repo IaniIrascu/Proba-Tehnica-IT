@@ -1,4 +1,5 @@
-import Navbar from "./myNavbar";
+import RegisterNavbar from "./myRegisterNavbar";
+import LoggedInNavbar from "./myLoggedInNavbar";
 import "../componentStyles/myLandingPage.css"
 import Footer from "./myFooter";
 import testoasa from "../pngs/testoasa.png"
@@ -36,7 +37,7 @@ function LandingPage () {
     return (
         <div className="backgroundStyle" >
             <div className="stickyNavbar">            
-                <Navbar 
+                <RegisterNavbar 
                 onRegisterClick={handleRegisterClick}
                 onLoginClick={handleLoginClick}/>
 
@@ -51,7 +52,12 @@ function LandingPage () {
                 <p className="textBoxStyle"> {textBox} </p>
                 <img className="imagineTestoasa" src={testoasa}/>
             </div>
-            <div>
+            <div className="divParinte">
+                <Poll/>
+                <Poll/>
+            </div>
+            <div className="divParinte">
+                <Poll/>
                 <Poll/>
             </div>
             <div style={{marginTop: "auto"}}>            

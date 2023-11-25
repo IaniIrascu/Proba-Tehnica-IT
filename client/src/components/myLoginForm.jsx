@@ -4,12 +4,19 @@ import { useState } from "react";
 function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isValidCredentials, setIsValidCredentials] = useState(null);
+    const [validCredentials, setIsValidCredentials] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const handleLogin = async (e) => {
+        e.preventDefault();
+
         try {
-            const response = await fetch('http://localhost:3000/check-credentials', {
+
+            setIsLoading(true);
+
+            const response = await fetch('http://localhost:3000/check-user', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({ email, password }),
@@ -20,12 +27,16 @@ function LoginForm() {
             setIsValidCredentials(data.validCredentials);
             if (data.validCredentials) {
                 window.alert('Credentials are correct!');
+                console.log("logged in");
             } else {
                 window.alert('Credentials are incorrect. Retry login!');
                 setErrorMessage(data.error);
             }
           } catch (error) {
             console.error('Error checking credentials:', error);
+          } finally {
+
+            setIsLoading(false);
           }
     }
 
@@ -50,9 +61,11 @@ function LoginForm() {
                     className="createAccountButton"
                     type="submit"
                     onClick={handleLogin}
-                    style={{marginTop:"150px"}}> Login
+                    style={{marginTop:"150px"}}>
+                {isLoading ? 'Logging in...' : 'Login'}
                 </button>
                 </label>
+                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             </form>
     );
 }

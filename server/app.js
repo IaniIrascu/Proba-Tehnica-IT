@@ -72,7 +72,7 @@ app.post('/users', async (req, res) => {
       }
     });
 
-app.post('/users', async (req, res) => {
+app.post('/check-user', async (req, res) => {
     const { email, password } = req.body;
   
     try {

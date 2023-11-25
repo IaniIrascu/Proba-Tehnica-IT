@@ -2,7 +2,7 @@ import logo from "../pngs/logoPollIt.png";
 import '../componentStyles/myNavbar.css';
 import { useState, useRef, useEffect } from "react";
 
-function Navbar( { onRegisterClick, onLoginClick }) {
+function RegisterNavbar( { onRegisterClick, onLoginClick }) {
 
   const onRegisterClickRef = useRef(null);
   const onLoginClickRef = useRef(null);
@@ -34,4 +34,4 @@ function Navbar( { onRegisterClick, onLoginClick }) {
   }
   
 
-export default Navbar;
+export default RegisterNavbar;
