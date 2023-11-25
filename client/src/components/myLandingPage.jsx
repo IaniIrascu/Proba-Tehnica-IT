@@ -1,5 +1,4 @@
-import RegisterNavbar from "./myRegisterNavbar";
-import LoggedInNavbar from "./myLoggedInNavbar";
+import Navbar from "./myNavbar";
 import "../componentStyles/myLandingPage.css"
 import Footer from "./myFooter";
 import testoasa from "../pngs/testoasa.png"
@@ -34,20 +33,33 @@ function LandingPage () {
         setShowLoginPopup(false);
       }
 
+      const [ popupChange, setPopupChange ] = useState (false);
+
+      const handlePopupChange = (newPopupChange) => {
+        setPopupChange(newPopupChange);
+        if(popupChange)
+            window.location.reload();
+      }
+
+
     return (
         <div className="backgroundStyle" >
-            <div className="stickyNavbar">            
-                <RegisterNavbar 
+             <div className="stickyNavbar"> 
+                <Navbar 
                 onRegisterClick={handleRegisterClick}
-                onLoginClick={handleLoginClick}/>
+                onLoginClick={handleLoginClick}
+                />
 
                 <Popup 
                 showRegisterPopup={showRegisterPopup} 
                 closeRegisterPopup={handleCloseRegisterPopup} 
                 showLoginPopup={showLoginPopup}
-                closeLoginPopup={handleCloseLoginPopup}
-                /> 
+                closeLoginPopup={handleCloseLoginPopup} 
+                onPopupChange={handlePopupChange}
+             />                        
             </div>
+
+
             <div className="textBoxTestoasaContainer">
                 <p className="textBoxStyle"> {textBox} </p>
                 <img className="imagineTestoasa" src={testoasa}/>

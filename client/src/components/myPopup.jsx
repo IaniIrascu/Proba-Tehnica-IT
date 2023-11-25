@@ -2,10 +2,10 @@ import "../componentStyles/myPopup.css"
 import closeButton from "../pngs/closeButton.png"
 import RegisterForm from "./myRegisterForm";
 import LoginForm from "./myLoginForm";
-import { useRef } from "react";
+import { useState } from "react";
 
 function Popup({ closeRegisterPopup, showRegisterPopup,
-showLoginPopup, closeLoginPopup}) {
+showLoginPopup, closeLoginPopup }) {
     
     const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
     : 'popup display-none';
@@ -15,6 +15,8 @@ showLoginPopup, closeLoginPopup}) {
   
     const showHide = (showLoginPopup || showRegisterPopup) ?
     'popup display-block' : 'popup display-none';
+
+
 
     return (
       <div className={showHide}>

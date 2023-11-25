@@ -2,11 +2,14 @@ import "../componentStyles/myForm.css"
 import { useState } from "react";
 
 function LoginForm() {
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validCredentials, setIsValidCredentials] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+
 
 
     const handleLogin = async (e) => {
@@ -23,9 +26,9 @@ function LoginForm() {
             });
       
             const data = await response.json();
-      
-            setIsValidCredentials(data.validCredentials);
-            if (data.validCredentials) {
+            setIsValidCredentials(data.accessToken);
+
+            if (data.accessToken) {
                 window.alert('Credentials are correct!');
                 console.log("logged in");
             } else {
@@ -39,6 +42,8 @@ function LoginForm() {
             setIsLoading(false);
           }
     }
+
+
 
     return (
             <form>
@@ -65,7 +70,7 @@ function LoginForm() {
                 {isLoading ? 'Logging in...' : 'Login'}
                 </button>
                 </label>
-                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                {errorMessage && <p className="textRegisterLogin">{errorMessage}</p>}
             </form>
     );
 }

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors');
 const { connectToDb, getDb } = require('./db.js')
@@ -9,6 +10,21 @@ const bcrypt = require ('bcrypt')
 const app = express()
 app.use(express.json())
 app.use(cors())
+
+
+//middleware
+  
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if(token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if(err) return res.sendStatus(403)
+      req.user = user
+    next()
+    })
+}
 
 //db connection
 let db
@@ -23,8 +39,9 @@ connectToDb((err) => {
 })
 
 //routes
-app.get('/users', (req, res) => {
-    let users = []
+app.get('/users', authenticateToken, (req, res) => {
+  
+  let users = []
 
     db.collection('users')
         .find()
@@ -80,17 +97,24 @@ app.post('/check-user', async (req, res) => {
   
       if (user) {
         const passwordMatch = await bcrypt.compare(password, user.password);
-  
+   
         if (passwordMatch) {
-          res.json({ validCredentials: true });
+          const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+          res.json({ accessToken: accessToken })
         } else {
-          res.json({ validCredentials: false, error: 'Incorrect password' });
+          res.json({ accessToken: null, error: 'Incorrect password' });
         }
       } else {
-        res.json({ validCredentials: false, error: 'Email not found' });
+        res.json({ accessToken: null, error: 'Email not found' });
       }
     } catch (error) {
       console.error('Error checking credentials:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+
+  app.get('/polls', authenticateToken, (req, res) =>{
+    res.json(polls.filter (poll => poll.email === req.user.email))
+  })
+

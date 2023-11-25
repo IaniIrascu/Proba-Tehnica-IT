@@ -56,6 +56,7 @@ function RegisterForm() {
       }
     }
 
+
     return (
             <form onSubmit={handleCreateAccount}>
                 <label className="textRegisterLogin">
