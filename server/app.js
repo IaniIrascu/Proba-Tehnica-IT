@@ -55,7 +55,7 @@ app.get('/users/:id', (req, res) => {
     }
 })
 
-app.post('/register', async (req, res) => {
+app.post('/users', async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -72,7 +72,7 @@ app.post('/register', async (req, res) => {
       }
     });
 
-app.post('/check-credentials', async (req, res) => {
+app.post('/users', async (req, res) => {
     const { email, password } = req.body;
   
     try {

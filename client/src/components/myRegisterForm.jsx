@@ -39,7 +39,7 @@ function RegisterForm() {
     const handleCreateAccount = (e) => {
 
         const user = { email, password };
-        if (!emailError && !passwordError) {
+        if (!emailError && !passwordError && !confirmPasswordError) {
             
             console.log('Form submitted successfully');
             e.preventDefault()
@@ -55,17 +55,6 @@ function RegisterForm() {
         console.log('Form has errors. Please correct them.');
       }
     }
-    
-    useEffect(() => {
-        fetch('http://localhost:3000/users')
-
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            console.log(data);
-        })
-    }, []);
 
     return (
             <form onSubmit={handleCreateAccount}>
