@@ -2,7 +2,7 @@ import Navbar from "./myNavbar";
 import "../componentStyles/myLandingPage.css"
 import Footer from "./myFooter";
 import testoasa from "../pngs/testoasa.png"
-import Popup from "./myPopup";
+import Forms from "./myForms";
 import { useState, useRef, useEffect } from "react";
 import Poll from "./myPoll";
 
@@ -33,13 +33,10 @@ function LandingPage () {
         setShowLoginPopup(false);
       }
 
-      const [ popupChange, setPopupChange ] = useState (false);
-
-      const handlePopupChange = (newPopupChange) => {
-        setPopupChange(newPopupChange);
-        if(popupChange)
-            window.location.reload();
-      }
+      const [isLogged, setIsLogged] = useState(false);
+      const handleLoginSuccess = () => {
+        setIsLogged(true);
+      };
 
 
     return (
@@ -48,14 +45,15 @@ function LandingPage () {
                 <Navbar 
                 onRegisterClick={handleRegisterClick}
                 onLoginClick={handleLoginClick}
+                isLogged={isLogged}
                 />
 
-                <Popup 
+                <Forms 
                 showRegisterPopup={showRegisterPopup} 
                 closeRegisterPopup={handleCloseRegisterPopup} 
                 showLoginPopup={showLoginPopup}
                 closeLoginPopup={handleCloseLoginPopup} 
-                onPopupChange={handlePopupChange}
+                onLoginSuccess={handleLoginSuccess}
              />                        
             </div>
 
@@ -65,16 +63,14 @@ function LandingPage () {
                 <img className="imagineTestoasa" src={testoasa}/>
             </div>
             <div className="divParinte">
-                <Poll/>
-                <Poll/>
+                <Poll pollId={1}/>
+                <Poll pollId={2}/>
             </div>
             <div className="divParinte">
-                <Poll/>
-                <Poll/>
+                <Poll pollId={3}/>
+                <Poll pollId={4}/>
             </div>
-            <div style={{marginTop: "auto"}}>            
                 <Footer/>
-            </div>
         </div>
     );
 

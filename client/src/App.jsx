@@ -3,7 +3,12 @@ import LandingPage from "./components/myLandingPage"
 
 function App() {
   return(
-    <LandingPage/>
+    <body 
+    style={{
+      height:"100%",
+      width:"100%"}}>
+      <LandingPage/>
+    </body>
   );
 }
 

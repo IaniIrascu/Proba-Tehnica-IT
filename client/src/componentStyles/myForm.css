@@ -2,17 +2,18 @@
     background-color: transparent;
     display: flex;
     flex-direction: column;
-    margin-top: 15%;
+    margin-top: 10%;
     border-color: #FFFFFF;
     border-radius: 10px;
     border-width: 5px;
-    height: 200%;
-    width: 100%;
+    height: auto;
+    width: auto;
     text-indent: 5%;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: large;
+    font-size: 50%;
     color: #FFFFFF;
+    padding: 7%;
 }
 
 .textRegisterLogin {
@@ -37,12 +38,12 @@ input::placeholder {
     font-family: 'Inter', sans-serif;
     align-self: center;
     border-radius: 10px;
-    margin-top: 10%;
+    margin-top: 25%;
     text-align: center;
     color: #04395E;
     width: 70%;
-    height: 20%;
-    padding: 3%;
+    height: auto;
+    padding: 4%;
     font-weight: 700;
 }
 
@@ -52,11 +53,7 @@ input::placeholder {
 }
 
 .textError {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
     font-weight: 500;
-    font-size: 20px;
     color: #FFFFFF;
     margin-top: 5px;
 }

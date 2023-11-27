@@ -1,8 +1,21 @@
-import { useState, useEffect } from 'react'
+import "../componentStyles/myPopup.css"
+import closeButton from "../pngs/closeButton.png"
 import "../componentStyles/myForm.css"
+import { useState } from "react";
+
+function Forms({ closeRegisterPopup, showRegisterPopup,
+showLoginPopup, closeLoginPopup, onLoginSuccess}) {
+    
+    const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
+    : 'popup display-none';
+
+    const showHideClassNameLogin = showLoginPopup ? 'popup display-block' 
+    : 'popup display-none';  
+  
+    const showHide = (showLoginPopup || showRegisterPopup) ?
+    'popup display-block' : 'popup display-none';
 
 
-function RegisterForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,14 +73,58 @@ function RegisterForm() {
       }
     }
 
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            setIsLoading(true);
+
+            const response = await fetch('http://localhost:3000/check-user', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({ email, password }),
+            });
+      
+            const data = await response.json();
+
+            if (data.accessToken) {
+                window.alert('Credentials are correct!');
+                console.log("logged in");
+                onLoginSuccess();
+            } else {
+                window.alert('Credentials are incorrect. Retry login!');
+                setErrorMessage(data.error);
+            }
+          } catch (error) {
+            console.error('Error checking credentials:', error);
+          } finally {
+
+            setIsLoading(false);
+          }
+    }
+
 
     return (
-            <form style={{
-              display:"flex",
-              flexDirection:"column",
-              justifyContent:"center",
-              alignItems:"center"
-              }}>
+      <div className={showHide} >
+      <div className={showHideClassNameRegister}>
+        <section className="popup-main">
+
+        <div
+        style={{display:"flex",
+        justifyContent:"end"}}>
+          <button>
+            <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
+          </button>
+        </div>
+        <form>
                 <label className="textRegisterLogin">
                     Register
                 <input 
@@ -110,7 +167,48 @@ function RegisterForm() {
                 </button>                
                 </label>
             </form>
+        </section>
+      </div>
+      <div className={showHideClassNameLogin}>
+        <section className="popup-main">
+
+          <div
+          style={{display:"flex",
+          justifyContent:"end"}}>
+            <button onClick={closeLoginPopup}>
+              <img onClick={closeLoginPopup} className="closeButton" src={closeButton}/>
+            </button>
+          </div>
+          <form>
+                <label className="textRegisterLogin">
+                    Login
+                <input 
+                    className="formField"
+                    type="email" 
+                    placeholder="Email"
+                    value={loginEmail} 
+                    onChange={(e) => setLoginEmail(e.target.value)} 
+                />
+                <input 
+                    className="formField"
+                    type="password" 
+                    placeholder="Password"
+                    value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} 
+                />                
+                {errorMessage && <p>{errorMessage}</p>}
+                <button 
+                    className="createAccountButton"
+                    type="submit"
+                    onClick={handleLogin}>
+                    {isLoading ? 'Logging in...' : 'Login'}
+                </button>
+                </label>
+            </form>
+        </section>
+      </div>
+    </div>
+
     );
-}
- 
-export default RegisterForm;
+  }
+  
+  export default Forms;

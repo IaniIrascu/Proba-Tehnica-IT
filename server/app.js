@@ -11,10 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-
-//middleware
-  
-function authenticateToken(req, res, next) {
+  function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
     if(token == null) return res.sendStatus(401)
@@ -39,7 +36,7 @@ connectToDb((err) => {
 })
 
 //routes
-app.get('/users', authenticateToken, (req, res) => {
+app.get('/users', (req, res) => {
   
   let users = []
 
@@ -76,10 +73,8 @@ app.post('/users', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Hash the password before storing it in the database
         const hashedPassword = await bcrypt.hash(password, 10);
     
-        // Save the user with the hashed password
         await db.collection('users').insertOne({ email, password: hashedPassword });
     
         res.json({ success: true });

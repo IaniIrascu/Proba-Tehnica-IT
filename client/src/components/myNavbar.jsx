@@ -2,11 +2,10 @@ import logo from "../pngs/logoPollIt.png";
 import '../componentStyles/myNavbar.css';
 import { useState, useRef, useEffect } from "react";
 
-function RegisterNavbar( { onRegisterClick, onLoginClick }) {
+function Navbar( { onRegisterClick, onLoginClick, isLogged }) {
 
   const onRegisterClickRef = useRef(null);
   const onLoginClickRef = useRef(null);
-
 
     return (
       <nav className="navbar navbar-expand-lg"
@@ -22,30 +21,37 @@ function RegisterNavbar( { onRegisterClick, onLoginClick }) {
         
         <div className="navbar-nav ml-auto" id="navbarSupportedContent">
           
-          <a className="nav-link navbarTextStyle"> 
-          <button onClick={onLoginClick} 
-          ref={onLoginClickRef}> Login</button> 
-          </a>
-
-          <a className="nav-link navbarTextStyle"> 
-          <button onClick={onRegisterClick} 
-          ref={onRegisterClickRef}> Register</button>
-          </a>
-          
-          <a className="nav-link navbarTextStyle"> 
-          <button onClick={onLoginClick} 
-          ref={onLoginClickRef}> Create poll</button> 
-          </a>
-
-          <a className="nav-link navbarTextStyle"> 
-          <button onClick={onRegisterClick} 
-          ref={onRegisterClickRef}> Log out </button>
-
-          </a>
+        {isLogged ? (
+          <>
+            <a className="nav-link navbarTextStyle">
+              <button onClick={onLoginClick} ref={onLoginClickRef}>
+                Create poll
+              </button>
+            </a>
+            <a className="nav-link navbarTextStyle">
+              <button onClick={onRegisterClick} ref={onRegisterClickRef}>
+                Log out
+              </button>
+            </a>
+          </>
+        ) : (
+          <>
+            <a className="nav-link navbarTextStyle">
+              <button onClick={onLoginClick} ref={onLoginClickRef}>
+                Login
+              </button>
+            </a>
+            <a className="nav-link navbarTextStyle">
+              <button onClick={onRegisterClick} ref={onRegisterClickRef}>
+                Register
+              </button>
+            </a>
+          </>
+        )}
         </div>
       </nav>
     );
   }
   
 
-export default RegisterNavbar;
+export default Navbar;

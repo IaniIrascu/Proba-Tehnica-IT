@@ -1,70 +1,58 @@
 
 .myPerfectPoll {
     background-color: #FFFFFF;
-    width: 600px;
-    height: 650px;
+    width: 30%;
     margin-left: 8%;
     margin-right: 8%;
     border-radius: 30px;
     font-family: 'Inter', sans-serif;
     z-index: 0;
+    padding-bottom: 10%;
 }
 
 .textStyle {
-    margin-left: 20px;
+    margin-left: 5%;
     margin-top: 30px;
     font-size: 30px;
 }
 
-.optionsStyle {
-    font-size: 24px;
-
-}
-
 h5 {
     font-weight: 100;
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 16px;
+    margin-left: 5%;
+    margin-top: 3%;
+    margin-bottom: 6%;
+    font-size: 100%;
 }
   
   .radioContainer {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 140%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin-left: 25px;
-    margin-top: 40px;
+    margin-left: 5%;
     z-index: 0;
   }
   
   .radioContainer input {
-    position: absolute;
     opacity: 0;
     cursor: pointer;
     z-index: 0;
   }
   
   .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
+    width: 3vh;
+    height: 3vh;
     z-index: 0;
-  }
-
-  .radioContainer input ~ .checkmark {
     border: 3px solid #04395E;
+    border-radius: 50%;
+    margin-right: 3%;
   }
+  
   
   .radioContainer:hover input ~ .checkmark {
     background-color: #ccc;
