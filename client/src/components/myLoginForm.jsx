@@ -46,7 +46,12 @@ function LoginForm() {
 
 
     return (
-            <form>
+            <form style={{
+                display:"flex",
+                flexDirection:"column",
+                justifyContent:"center",
+                alignItems:"center"
+            }}>
                 <label className="textRegisterLogin">
                     Login
                 <input 

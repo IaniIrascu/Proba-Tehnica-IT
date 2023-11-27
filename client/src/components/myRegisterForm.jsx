@@ -9,6 +9,7 @@ function RegisterForm() {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [isRegistering, setIsRegistering] = useState(false);
 
 
     const validateEmail = () => {
@@ -38,6 +39,8 @@ function RegisterForm() {
 
     const handleCreateAccount = (e) => {
 
+      setIsRegistering(true);
+
         const user = { email, password };
         if (!emailError && !passwordError && !confirmPasswordError) {
             
@@ -50,6 +53,7 @@ function RegisterForm() {
         })
         .then(() => {
             console.log('new user added');
+            setIsRegistering(false);
         })
     } else {
         console.log('Form has errors. Please correct them.');
@@ -58,7 +62,12 @@ function RegisterForm() {
 
 
     return (
-            <form onSubmit={handleCreateAccount}>
+            <form style={{
+              display:"flex",
+              flexDirection:"column",
+              justifyContent:"center",
+              alignItems:"center"
+              }}>
                 <label className="textRegisterLogin">
                     Register
                 <input 
@@ -87,7 +96,7 @@ function RegisterForm() {
                     type="password" 
                     placeholder="Confirm Password"
                     value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value);
-                        setConfirmPasswordError(''); // Clear previous error when the user types
+                        setConfirmPasswordError(''); 
                       }}
                       onBlur={validateConfirmPassword}
                     />
@@ -96,7 +105,8 @@ function RegisterForm() {
                 <button 
                     className="createAccountButton"
                     type="submit"
-                    onClick={handleCreateAccount}> Create account
+                    onClick={handleCreateAccount}> 
+                    {isRegistering ? 'Creating account...' : 'Create account'}
                 </button>                
                 </label>
             </form>

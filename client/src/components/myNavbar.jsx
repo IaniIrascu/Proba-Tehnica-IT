@@ -19,14 +19,28 @@ function RegisterNavbar( { onRegisterClick, onLoginClick }) {
         <a className="navbar-brand navbarImg" href="#">
           <img src={logo}/>
         </a>
+        
         <div className="navbar-nav ml-auto" id="navbarSupportedContent">
+          
           <a className="nav-link navbarTextStyle"> 
           <button onClick={onLoginClick} 
           ref={onLoginClickRef}> Login</button> 
           </a>
+
           <a className="nav-link navbarTextStyle"> 
           <button onClick={onRegisterClick} 
           ref={onRegisterClickRef}> Register</button>
+          </a>
+          
+          <a className="nav-link navbarTextStyle"> 
+          <button onClick={onLoginClick} 
+          ref={onLoginClickRef}> Create poll</button> 
+          </a>
+
+          <a className="nav-link navbarTextStyle"> 
+          <button onClick={onRegisterClick} 
+          ref={onRegisterClickRef}> Log out </button>
+
           </a>
         </div>
       </nav>

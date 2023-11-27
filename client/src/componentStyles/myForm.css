@@ -2,15 +2,13 @@
     background-color: transparent;
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-top: 15%;
     border-color: #FFFFFF;
     border-radius: 10px;
     border-width: 5px;
-    height: 80px;
-    width: 500px;
-    text-indent: 20px;
+    height: 200%;
+    width: 100%;
+    text-indent: 5%;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: large;
@@ -22,31 +20,29 @@
     flex-direction: column;
     text-align: center;
     font-weight: 700;
-    font-size: 50px;
+    font-size: 320%;
     color: #FFFFFF;
 }
 
 input::placeholder {
-    text-indent: 20px;
+    text-indent: 5%;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 23px;
+    font-size: 120%;
     color: #FFFFFF;
 }
 
 .createAccountButton {
     background-color: #FFFFFF;
     font-family: 'Inter', sans-serif;
-    flex-direction: column;
     align-self: center;
-    display: flex;
     border-radius: 10px;
-    margin-top: 50px;
+    margin-top: 10%;
     text-align: center;
     color: #04395E;
-    width: 250px;
-    height: 60px;
-    padding: 17px;
+    width: 70%;
+    height: 20%;
+    padding: 3%;
     font-weight: 700;
 }
 

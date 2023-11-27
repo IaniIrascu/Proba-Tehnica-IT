@@ -19,19 +19,20 @@ showLoginPopup, closeLoginPopup }) {
 
 
     return (
-      <div className={showHide}>
+      <div className={showHide} >
       <div className={showHideClassNameRegister}>
         <section className="popup-main">
 
         <div
         style={{display:"flex",
-        justifyContent:"end",
-        width:"100%"}}>
+        justifyContent:"end"}}>
           <button>
             <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
           </button>
         </div>
-          <RegisterForm/>
+        <div className="display-block">
+        <RegisterForm/>
+        </div>
         </section>
       </div>
       <div className={showHideClassNameLogin}>
@@ -39,8 +40,7 @@ showLoginPopup, closeLoginPopup }) {
 
           <div
           style={{display:"flex",
-          justifyContent:"end",
-          width:"100%"}}>
+          justifyContent:"end"}}>
             <button onClick={closeLoginPopup}>
               <img onClick={closeLoginPopup} className="closeButton" src={closeButton}/>
             </button>
