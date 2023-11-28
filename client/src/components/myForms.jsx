@@ -62,7 +62,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
             
             console.log('Form submitted successfully');
             e.preventDefault()
-            fetch('http://localhost:3000/users', {
+            fetch('http://localhost:3000/register-user', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
@@ -102,13 +102,17 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
       
             const data = await response.json();
             
-            if (data.accesToken != null) {
-                window.alert('Credentials are correct!');
+            if (data.accessToken != null) {
+                window.alert("Credentials are correct! Logged in!");
                 console.log("logged in");
                 onLoginSuccess();
+                console.log(data.accesToken);
+
             } else {
-                window.alert('Credentials are incorrect. Retry login!');
+                window.alert("Credentials incorrect! Try again!");
                 setErrorMessage(data.error);
+                console.log(data.accesToken);
+
             }
           } catch (error) {
             console.error('Error checking credentials:', error);
@@ -204,7 +208,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
                     value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)
                     } 
                 />                
-                {errorMessage && <p>{errorMessage}</p>}
+                {errorMessage && <p className="textError">{errorMessage}</p>}
                 <button 
                     className="createAccountButton"
                     type="submit"
@@ -220,7 +224,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
 
 
       <div className={showHideClassNameCreatePoll}>
-      <section className="popup-main">
+      <section className="popup-main" style={{width:"40%"}}>
           <div
           style={{display:"flex",
           justifyContent:"end"}}>
@@ -254,6 +258,11 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
                  className="createPollField"
                  placeholder="Option 3">
                 </input>
+                <button 
+                    className="createAccountButton"
+                    type="submit"
+                    onClick={handleLogin}
+                    >Create poll</button>
           </form>
       </section>
       </div>

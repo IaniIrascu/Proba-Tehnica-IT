@@ -71,7 +71,7 @@ app.get('/users/:id', (req, res) => {
     }
 })
 
-app.post('/users', async (req, res) => {
+app.post('/register-user', async (req, res) => {
     const { email, password } = req.body;
 
     try {

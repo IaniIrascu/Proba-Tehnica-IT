@@ -12,6 +12,7 @@
     padding: 2%;
     box-shadow: 0.3px 0.3px 9px #021B2C;    
     z-index: 50;
+    width: 30%;
   }
   
   .display-block {

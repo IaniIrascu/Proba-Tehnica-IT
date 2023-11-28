@@ -6,8 +6,6 @@
     border-color: #FFFFFF;
     border-radius: 10px;
     border-width: 5px;
-    height: auto;
-    width: auto;
     text-indent: 5%;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -38,7 +36,7 @@ div input::placeholder {
     font-family: 'Inter', sans-serif;
     align-self: center;
     border-radius: 10px;
-    margin-top: 25%;
+    margin-top: 10%;
     text-align: center;
     color: #04395E;
     width: 70%;
@@ -56,13 +54,14 @@ div input::placeholder {
     font-weight: 500;
     color: #FFFFFF;
     margin-top: 5px;
+    font-size: 40%;
 }
 
 
 .createPollForm {
     display: flex;
     flex-direction: column;
-    width: 80vh;
+    width: 100%;
 }
 
 
@@ -81,6 +80,7 @@ div input::placeholder {
     font-family: 'Inter', sans-serif;
     text-indent: 5%;
     margin-right: 5%;
+    font-size: 150%;
 }
 
 section form h1 {
@@ -94,7 +94,7 @@ section form h2 {
     color:#FFFFFF;
     font-family: 'Inter', sans-serif;
     margin-left: 5%;
-    font-size: larger;
+    font-size: 150%;
     margin-top: 5%;
 }
 
