@@ -4,15 +4,18 @@ import "../componentStyles/myForm.css"
 import { useState } from "react";
 
 function Forms({ closeRegisterPopup, showRegisterPopup,
-showLoginPopup, closeLoginPopup, onLoginSuccess}) {
+showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreatePollPopup}) {
     
     const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
     : 'popup display-none';
 
     const showHideClassNameLogin = showLoginPopup ? 'popup display-block' 
     : 'popup display-none';  
+
+    const showHideClassNameCreatePoll = showCreatePollPopup ? 'popup display-block' 
+    : 'popup display-none';  
   
-    const showHide = (showLoginPopup || showRegisterPopup) ?
+    const showHide = (showLoginPopup || showRegisterPopup || showCreatePollPopup) ?
     'popup display-block' : 'popup display-none';
 
 
@@ -86,16 +89,20 @@ showLoginPopup, closeLoginPopup, onLoginSuccess}) {
         try {
 
             setIsLoading(true);
+            const obj = {"email": loginEmail,
+                         "password": loginPassword }
 
             const response = await fetch('http://localhost:3000/check-user', {
               method: 'POST',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({ email, password }),
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(obj),
             });
       
             const data = await response.json();
-
-            if (data.accessToken) {
+            
+            if (data.accesToken != null) {
                 window.alert('Credentials are correct!');
                 console.log("logged in");
                 onLoginSuccess();
@@ -113,7 +120,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess}) {
 
 
     return (
-      <div className={showHide} >
+      <div className={showHide}>
       <div className={showHideClassNameRegister}>
         <section className="popup-main">
 
@@ -124,7 +131,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess}) {
             <img onClick={closeRegisterPopup} className="closeButton" src={closeButton}/>
           </button>
         </div>
-        <form>
+        <form onSubmit={handleCreateAccount}>
                 <label className="textRegisterLogin">
                     Register
                 <input 
@@ -169,9 +176,10 @@ showLoginPopup, closeLoginPopup, onLoginSuccess}) {
             </form>
         </section>
       </div>
-      <div className={showHideClassNameLogin}>
-        <section className="popup-main">
 
+
+      <div className={showHideClassNameLogin}>        
+        <div className="popup-main">
           <div
           style={{display:"flex",
           justifyContent:"end"}}>
@@ -193,18 +201,61 @@ showLoginPopup, closeLoginPopup, onLoginSuccess}) {
                     className="formField"
                     type="password" 
                     placeholder="Password"
-                    value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} 
+                    value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)
+                    } 
                 />                
                 {errorMessage && <p>{errorMessage}</p>}
                 <button 
                     className="createAccountButton"
                     type="submit"
-                    onClick={handleLogin}>
+                    onClick={handleLogin}
+                    >
                     {isLoading ? 'Logging in...' : 'Login'}
                 </button>
                 </label>
             </form>
-        </section>
+        </div>
+      </div>
+
+
+
+      <div className={showHideClassNameCreatePoll}>
+      <section className="popup-main">
+          <div
+          style={{display:"flex",
+          justifyContent:"end"}}>
+            <button onClick={closeCreatePollPopup}>
+              <img onClick={closeCreatePollPopup} className="closeButton" src={closeButton}/>
+            </button>
+          </div>
+          <form className="createPollForm">
+                <h1>
+                  Create a Poll
+                </h1>
+                <h2>
+                  Title
+                </h2>
+                <input 
+                className="createPollField"
+                placeholder="Type your question here">
+                </input>
+                <h2>
+                  Answer Options
+                </h2>
+                <input 
+                 className="createPollField"
+                 placeholder="Option 1">
+                </input>
+                <input 
+                 className="createPollField"
+                 placeholder="Option 2">
+                </input>
+                <input 
+                 className="createPollField"
+                 placeholder="Option 3">
+                </input>
+          </form>
+      </section>
       </div>
     </div>
 

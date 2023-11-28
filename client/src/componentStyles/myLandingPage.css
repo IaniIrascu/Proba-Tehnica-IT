@@ -1,11 +1,12 @@
-.backgroundStyle {
-  height: 100%;
-  width: 100%;
-  background-image: url('../pngs/landingPageBg.png');
-   background-repeat: no-repeat;
-   background-size: cover;
+.landingPageContainer {
+  position: relative;
+  min-height: 100vh;
 }
-
+.backgroundStyle {
+  background-image: url('../pngs/landingPageBg.png');
+  background-size: cover;
+  height: 100%;
+}
 
 .stickyNavbar {
     position: sticky;
@@ -36,6 +37,6 @@
     flex-direction: row;
     margin-right: 5%;
     margin-left: 5%;
-    margin-bottom: 2%;
+    margin-top: 5%;
     justify-content: center;
 }

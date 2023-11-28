@@ -11,15 +11,17 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-  function authenticateToken(req, res, next) {
+function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
     if(token == null) return res.sendStatus(401)
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if(err) return res.sendStatus(403)
+      if(err) {
+        return res.sendStatus(403)
+      }
       req.user = user
-    next()
+      next()
     })
 }
 
@@ -94,7 +96,7 @@ app.post('/check-user', async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
    
         if (passwordMatch) {
-          const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+          const accessToken = jwt.sign( user, process.env.ACCESS_TOKEN_SECRET)
           res.json({ accessToken: accessToken })
         } else {
           res.json({ accessToken: null, error: 'Incorrect password' });
