@@ -38,7 +38,7 @@ connectToDb((err) => {
 })
 
 //routes
-app.get('/users', (req, res) => {
+app.get('/users', (req, res) => { //get users
   
   let users = []
 
@@ -53,7 +53,7 @@ app.get('/users', (req, res) => {
         })
 })
 
-app.get('/polls', (req, res) => {
+app.get('/polls', (req, res) => { //get polls
   
   let polls = []
 
@@ -68,25 +68,25 @@ app.get('/polls', (req, res) => {
         })
 })
 
-app.get('/users/:id', (req, res) => {
+app.get('/userpolls' , authenticateToken, (req, res) => { //get polls of user
+  const { email } = req.body;
 
-    if(ObjectId.isValid(req.params.id)) {
+  let userPolls = []
 
+    db.collection('polls')
+    .find()
+    .forEach(userPoll => {
+      if(userPoll.email === email) 
+      userPolls.push(userPoll)
+    }) 
+    .then(() => {
+        res.status(200).json(userPolls)
+    })
+    .catch(() => {
+        res.status(500).json({error: 'could not fetch'})
+    })})
 
-        db.collection('users')
-        .findOne({_id: new ObjectId(req.params.id)})
-        .then(doc => {
-            res.status(200).json(doc)
-        })
-        .catch(err => {
-            res.status(500).json({error: 'could not fetch'})
-        })
-    } else {
-        res.status(500).json({error: 'not a valid id'})
-    }
-})
-
-app.post('/register-user', async (req, res) => {
+app.post('/register-user', async (req, res) => { //register user
     const { email, password } = req.body;
 
     try {
@@ -101,7 +101,7 @@ app.post('/register-user', async (req, res) => {
       }
     });
 
- app.post('/create-poll', async (req, res) => {
+ app.post('/create-poll', async (req, res) => { //create poll
     const { email, title, options } = req.body;
     
      try {
@@ -115,7 +115,7 @@ app.post('/register-user', async (req, res) => {
     });
   
 
-app.post('/check-user', async (req, res) => {
+app.post('/check-user', async (req, res) => { //login user
     const { email, password } = req.body;
   
     try {

@@ -53,11 +53,8 @@ function LandingPage () {
         setShowCreatePollPopup(false);
       }
 
-       // Assuming you want to render 4 polls
-              const numberOfPolls = 4;
-            
-              // Generate an array of poll IDs [1, 2, 3, 4]
-              const pollIds = Array.from({ length: numberOfPolls / 2 }, (_, index) => index + 2);
+        const numberOfPolls = 4;
+        const pollIds = Array.from({ length: numberOfPolls / 2 }, (_, index) => index + 2);
 
 
     return (
@@ -86,8 +83,6 @@ function LandingPage () {
             </div>
          <div className="backgroundStyle" >
            
-          
-
             {isLogged ? (<> <div style={{height:"100vh"}}></div></>) : (
             <>
             <div className="textBoxTestoasaContainer">
@@ -101,8 +96,6 @@ function LandingPage () {
           <>
             <div>
               <Poll/>
-
-              
             </div>
           </>) : (
                 <>

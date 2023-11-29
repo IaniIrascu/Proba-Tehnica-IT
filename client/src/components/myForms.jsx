@@ -133,7 +133,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
       const poll = {
         "email": loginEmail,
         "title": pollTitle,
-        "options": pollOptions
+        "options": pollOptions,
     }
         const response = await fetch('http://localhost:3000/create-poll', {
           method: 'POST',
