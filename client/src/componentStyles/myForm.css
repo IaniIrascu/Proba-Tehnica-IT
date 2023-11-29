@@ -102,3 +102,16 @@ section input::placeholder {
     font-family: 'Inter', sans-serif;
     font-weight: 100;
 }
+
+@media screen and (max-width: 768px) {
+    .formField, .textRegisterLogin, .div input::placeholder, .createAccountButton, .createPollField, section form h1, section form h2, section input::placeholder {
+        font-size: 16px;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .createAccountButton {
+        width: 90%;
+    }
+}

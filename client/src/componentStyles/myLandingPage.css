@@ -40,3 +40,23 @@
     margin-top: 5%;
     justify-content: center;
 }
+
+@media screen and (max-width: 768px) {
+  .textBoxTestoasaContainer {
+    flex-direction: column;
+    margin: 5% 5%;
+  }
+
+  .textBoxStyle {
+    font-size: 200%;
+  }
+
+  .divParinte {
+    flex-direction: column;
+    margin: 5%;
+  }
+
+  .imagineTestoasa {
+    max-width: 100%;
+  }
+}

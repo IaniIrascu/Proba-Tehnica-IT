@@ -63,3 +63,14 @@ h5 {
     border-radius: 50%;
   }
   
+
+  /* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .myPerfectPoll {
+    width: 80%; /* Adjust the width for smaller screens */
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+
+}
