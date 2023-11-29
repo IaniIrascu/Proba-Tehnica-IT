@@ -53,6 +53,21 @@ app.get('/users', (req, res) => {
         })
 })
 
+app.get('/polls', (req, res) => {
+  
+  let polls = []
+
+    db.collection('polls')
+        .find()
+        .forEach(poll => polls.push(poll)) 
+        .then(() => {
+            res.status(200).json(polls)
+        })
+        .catch(() => {
+            res.status(500).json({error: 'could not fetch'})
+        })
+})
+
 app.get('/users/:id', (req, res) => {
 
     if(ObjectId.isValid(req.params.id)) {
@@ -86,6 +101,20 @@ app.post('/register-user', async (req, res) => {
       }
     });
 
+ app.post('/create-poll', async (req, res) => {
+    const { email, title, options } = req.body;
+    
+     try {
+        const result = await db.collection('polls').insertOne({ email, title, options });
+  
+        res.status(201).json(result);
+      } catch (error) {
+        console.error('Error creating poll:', error);
+        res.status(500).send('Internal Server Error');
+      } 
+    });
+  
+
 app.post('/check-user', async (req, res) => {
     const { email, password } = req.body;
   
@@ -110,8 +139,4 @@ app.post('/check-user', async (req, res) => {
     }
   });
 
-
-  app.get('/polls', authenticateToken, (req, res) =>{
-    res.json(polls.filter (poll => poll.email === req.user.email))
-  })
 

@@ -123,6 +123,34 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
     }
 
 
+    const [pollTitle, setPollTitle] = useState("");
+    const [pollOptions, setPollOptions]=useState(["","",""]);
+
+
+    const handleCreatePoll = async (e) => {
+      e.preventDefault();
+      try {
+      const poll = {
+        "email": loginEmail,
+        "title": pollTitle,
+        "options": pollOptions
+    }
+        const response = await fetch('http://localhost:3000/create-poll', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(poll),
+        });
+  
+        const data = await response.json();
+  
+        console.log('Poll created successfully:', data);
+      } catch (error) {
+        console.error('Error creating poll:', error);
+      }
+    }
+
     return (
       <div className={showHide}>
       <div className={showHideClassNameRegister}>
@@ -241,27 +269,30 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
                 </h2>
                 <input 
                 className="createPollField"
-                placeholder="Type your question here">
-                </input>
+                placeholder="Type your question here"
+                value={pollTitle}
+                onChange={(e) => setPollTitle(e.target.value)}/>
                 <h2>
                   Answer Options
                 </h2>
-                <input 
-                 className="createPollField"
-                 placeholder="Option 1">
-                </input>
-                <input 
-                 className="createPollField"
-                 placeholder="Option 2">
-                </input>
-                <input 
-                 className="createPollField"
-                 placeholder="Option 3">
-                </input>
+                {pollOptions.map((pollOption, index) => (
+                  <input
+                    key={index}
+                    className="createPollField"
+                    placeholder={`Option ${index + 1}`}
+                    value={pollOption}
+                    onChange={(e) => {
+                      const updatedOptions = [...pollOptions];
+                      updatedOptions[index] = e.target.value;
+                      setPollOptions(updatedOptions);
+                    }}
+                  />
+                ))}
+
                 <button 
                     className="createAccountButton"
                     type="submit"
-                    onClick={handleLogin}
+                    onClick={handleCreatePoll}
                     >Create poll</button>
           </form>
       </section>

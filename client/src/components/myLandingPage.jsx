@@ -53,6 +53,12 @@ function LandingPage () {
         setShowCreatePollPopup(false);
       }
 
+       // Assuming you want to render 4 polls
+              const numberOfPolls = 4;
+            
+              // Generate an array of poll IDs [1, 2, 3, 4]
+              const pollIds = Array.from({ length: numberOfPolls / 2 }, (_, index) => index + 2);
+
 
     return (
       <div className="landingPageContent">
@@ -91,19 +97,23 @@ function LandingPage () {
             </>)}
            
          
-          {isLogged ? (<></>) : (
-            <>
-            <div className="divParinte">
-                <Poll pollId={1}/>
-                <Poll pollId={2}/>
+          {isLogged ? (
+          <>
+            <div>
+              <Poll/>
+
+              
             </div>
-            <div className="divParinte">
-                <Poll pollId={3}/>
-                <Poll pollId={4}/>
-            </div> 
-            </> )}
-          
-            </div>
+          </>) : (
+                <>
+                  {pollIds.map((pollId) => (
+                    <div className="divParinte" key={pollId}>
+                      <Poll pollId={pollId} />
+                      <Poll pollId={pollId.index + 1} />
+                    </div>
+                  ))}
+                </>)}
+          </div>
 
             <div>
               <Footer/>
