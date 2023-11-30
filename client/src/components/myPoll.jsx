@@ -1,6 +1,27 @@
 import "../componentStyles/myPoll.css"
 
-function Poll ( { pollTitle, pollOptions, pollId }) {
+function Poll ( { pollTitle, pollOptions, pollId, isMyPoll, accessToken }) {
+
+const handleDeletePoll = async () => {
+            try {
+              const response = await fetch(`http://localhost:3000/delete-poll`, {
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify({ title: pollTitle }),
+              });
+          
+              if (response.ok) {
+                console.log('Poll deleted successfully');
+              } else {
+                console.error('Failed to delete poll');
+              }
+            } catch (error) {
+              console.error('Error:', error);
+            };
+    }
 
     if(!pollTitle)
          pollTitle = "Ce animal se afla pe tricourile departamentului de IT?"
@@ -23,6 +44,16 @@ function Poll ( { pollTitle, pollOptions, pollId }) {
                     <input type="radio" name={uniqueName}/>
                     <span class="checkmark"/> {pollOptions[2]}
                 </label>
+                {isMyPoll ? (
+                <div>
+                <button
+                onClick={handleDeletePoll}>
+                    <p className="deleteButton">
+                        Delete
+                    </p>
+                </button>
+                </div>
+                ) : (<></>)}
             </p>
 )}
 

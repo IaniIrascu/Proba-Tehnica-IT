@@ -53,9 +53,9 @@ function LandingPage () {
         setShowCreatePollPopup(false);
       }
 
-
+      const [accessToken, setAccessToken] = useState("");
       const [otherPollData, setOtherPollData] = useState([""]);
-      const [numberOfOtherPolls, setNumberOfOtherPolls] = useState(4);
+      const [numberOfOtherPolls, setNumberOfOtherPolls] = useState();
 
       const displayOtherPolls = async () => {
        
@@ -73,14 +73,14 @@ function LandingPage () {
             console.log('Request done!', data.pollCount, data.otherPolls);
             setNumberOfOtherPolls(data.pollCount);
             setOtherPollData(data.otherPolls);
+
           } catch (error) {
             console.error('Error getting other polls:', error);
           }
       }
 
 
-      const [numberOfMyPolls, setNumberOfMyPolls] = useState(4);
-      const [accessToken, setAccessToken] = useState("");
+      const [numberOfMyPolls, setNumberOfMyPolls] = useState();
       const [loginEmail, setLoginEmail] = useState("");
       const [myPollData, setMyPollData] = useState([""]);
 
@@ -106,6 +106,10 @@ function LandingPage () {
       }
 
 
+        const defaultIds = [];
+        for(let def = 0; def < 4; def++){
+          defaultIds.push(def);
+        }
         const myPollIds = [];
        
         for (let i = 0; i < numberOfMyPolls; i++) {
@@ -122,7 +126,7 @@ function LandingPage () {
             displayMyPolls();
             displayOtherPolls();
           }
-        }, [isLogged, accessToken, loginEmail] );
+        }, [isLogged, accessToken, loginEmail ] );
 
     return (
       <div className="landingPageContent">
@@ -169,15 +173,27 @@ function LandingPage () {
                       pollTitle={myPollData[myPollId].title} 
                       pollOptions={myPollData[myPollId].options} 
                       pollId={myPollId} 
+                      isMyPoll={true}
+                      accessToken={accessToken}
+                      />           
+                    </div>
+                  ))}
+                  {otherPollIds.map((otherPollId) => (
+                    <div className="divParinte" key={otherPollId}>
+                      <Poll 
+                      pollTitle={otherPollData[otherPollId].title} 
+                      pollOptions={otherPollData[otherPollId].options} 
+                      pollId={numberOfMyPolls + otherPollId} 
+                      isMyPoll={false}
                       />           
                     </div>
                   ))}
                 </div>) : (
                 <div style={{display:"flex", flexWrap:"wrap"}}>
     
-                  {myPollIds.map((myPollId) => (
-                    <div className="divParinte" key={myPollId}>
-                      <Poll pollTitle={""} pollOptions={""} pollId={myPollId} />
+                  {defaultIds.map((defaultId) => (
+                    <div className="divParinte" key={defaultId}>
+                      <Poll pollTitle={""} pollOptions={""} pollId={defaultId} />
                     </div>
                   ))}
 

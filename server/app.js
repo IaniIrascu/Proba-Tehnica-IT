@@ -172,3 +172,26 @@ app.post('/check-user', async (req, res) => {                             //logi
   });
 
 
+  app.delete('/delete-poll', authenticateToken, async (req, res) => {
+    const { title } = req.body;
+    try {
+      const poll = await db.collection('polls').findOne({ title });
+  
+      if (!poll) {
+        return res.status(404).json({ message: 'Poll not found.' });
+      }
+  
+      const result = await db.collection('polls').deleteOne({ _id: poll._id });
+  
+      if (result.deletedCount === 1) {
+        res.status(200).json({ message: 'Poll deleted successfully.' });
+      } else {
+        res.status(404).json({ message: 'Poll not found.' });
+      }
+    } catch (error) {
+      console.error('Error deleting poll:', error);
+      res.status(500).json({ error: 'Internal server error.' });
+    }
+  });
+  
+

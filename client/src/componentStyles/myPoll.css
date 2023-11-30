@@ -6,7 +6,7 @@
     border-radius: 30px;
     font-family: 'Inter', sans-serif;
     z-index: 0;
-    padding-bottom: 10%;
+    padding-bottom: 2%;
 }
 
 .textStyle {
@@ -60,6 +60,16 @@ h5 {
   .radioContainer input:checked ~ .checkmark {
     background-color: #04395E;
     border-radius: 50%;
+  }
+
+  .deleteButton {
+    background-color: #04395E;
+    padding: 10%;
+    margin-top: 120%;
+    border-color: #04395E;
+    border-radius: 10%;
+    width: 120%;
+    color: #FFFFFF;
   }
   
 
