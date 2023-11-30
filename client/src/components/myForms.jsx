@@ -4,7 +4,9 @@ import "../componentStyles/myForm.css"
 import { useState } from "react";
 
 function Forms({ closeRegisterPopup, showRegisterPopup,
-showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreatePollPopup}) {
+showLoginPopup, closeLoginPopup, onLoginSuccess, 
+showCreatePollPopup, closeCreatePollPopup,
+setAccessToken, loginEmail, setLoginEmail }) {
     
     const showHideClassNameRegister = showRegisterPopup ? 'popup display-block' 
     : 'popup display-none';
@@ -76,11 +78,13 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
       }
     }
 
-    const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    const handleAccessToken = (e) => {
+      setAccessToken(e);
+    }
 
 
     const handleLogin = async (e) => {
@@ -106,13 +110,13 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
                 window.alert("Credentials are correct! Logged in!");
                 console.log("logged in");
                 onLoginSuccess();
-                console.log(data.accesToken);
+                console.log(data.accessToken);
+                handleAccessToken(data.accessToken);
 
             } else {
                 window.alert("Credentials incorrect! Try again!");
                 setErrorMessage(data.error);
-                console.log(data.accesToken);
-
+                console.log(data.accessToken);
             }
           } catch (error) {
             console.error('Error checking credentials:', error);
@@ -126,6 +130,10 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
     const [pollTitle, setPollTitle] = useState("");
     const [pollOptions, setPollOptions]=useState(["","",""]);
 
+
+    const handleLoginEmail = (e) => {
+      setLoginEmail(e);
+    }
 
     const handleCreatePoll = async (e) => {
       e.preventDefault();
@@ -227,7 +235,7 @@ showLoginPopup, closeLoginPopup, onLoginSuccess, showCreatePollPopup, closeCreat
                     type="email" 
                     placeholder="Email"
                     value={loginEmail} 
-                    onChange={(e) => setLoginEmail(e.target.value)} 
+                    onChange={(e) => handleLoginEmail(e.target.value)} 
                 />
                 <input 
                     className="formField"

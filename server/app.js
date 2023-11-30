@@ -38,7 +38,7 @@ connectToDb((err) => {
 })
 
 //routes
-app.get('/users', (req, res) => { //get users
+app.get('/users', (req, res) => {                             //get users
   
   let users = []
 
@@ -53,7 +53,7 @@ app.get('/users', (req, res) => { //get users
         })
 })
 
-app.get('/polls', (req, res) => { //get polls
+app.get('/polls', (req, res) => {                              //get polls
   
   let polls = []
 
@@ -68,25 +68,32 @@ app.get('/polls', (req, res) => { //get polls
         })
 })
 
-app.get('/userpolls' , authenticateToken, (req, res) => { //get polls of user
+app.post('/userpolls' , authenticateToken, (req, res) => {                //get polls of user
   const { email } = req.body;
 
   let userPolls = []
+  let pollCount = 0;
 
     db.collection('polls')
     .find()
     .forEach(userPoll => {
       if(userPoll.email === email) 
-      userPolls.push(userPoll)
+        {
+          userPolls.push(userPoll)
+          pollCount++;
+        }
+
     }) 
     .then(() => {
-        res.status(200).json(userPolls)
+        res.status(200).json({pollCount: pollCount, userPolls})
     })
     .catch(() => {
         res.status(500).json({error: 'could not fetch'})
     })})
 
-app.post('/register-user', async (req, res) => { //register user
+
+
+app.post('/register-user', async (req, res) => {                       //register user
     const { email, password } = req.body;
 
     try {
@@ -101,7 +108,8 @@ app.post('/register-user', async (req, res) => { //register user
       }
     });
 
- app.post('/create-poll', async (req, res) => { //create poll
+
+ app.post('/create-poll', async (req, res) => {                      //create poll
     const { email, title, options } = req.body;
     
      try {
@@ -115,7 +123,8 @@ app.post('/register-user', async (req, res) => { //register user
     });
   
 
-app.post('/check-user', async (req, res) => { //login user
+
+app.post('/check-user', async (req, res) => {                             //login user
     const { email, password } = req.body;
   
     try {

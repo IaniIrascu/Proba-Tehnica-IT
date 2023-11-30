@@ -53,9 +53,44 @@ function LandingPage () {
         setShowCreatePollPopup(false);
       }
 
-        const numberOfPolls = 4;
-        const pollIds = Array.from({ length: numberOfPolls / 2 }, (_, index) => index + 2);
 
+      const [numberOfPolls, setNumberOfPolls] = useState(4);
+      const [accessToken, setAccessToken] = useState("");
+      const [loginEmail, setLoginEmail] = useState("");
+      const [pollData, setPollData] = useState([""]);
+
+
+      const displayPolls = async () => {
+       
+        try {
+            const response = await fetch('http://localhost:3000/userpolls', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+              },
+              body: JSON.stringify({ email: loginEmail }),
+            });
+      
+            const data = await response.json();
+            console.log('Request done!', data.pollCount, data.userPolls);
+            setNumberOfPolls(data.pollCount);
+            setPollData(data.userPolls);
+          } catch (error) {
+            console.error('Error getting polls:', error);
+          }
+      }
+
+        const pollIds = [];
+
+        for (let i = 0; i < numberOfPolls; i += 2) {
+          pollIds.push(i);
+        }      
+        useEffect(() => {
+          if (isLogged) {
+            displayPolls();
+          }
+        }, [isLogged, accessToken, loginEmail] );
 
     return (
       <div className="landingPageContent">
@@ -77,13 +112,16 @@ function LandingPage () {
                 onLoginSuccess={handleLoginSuccess}
                 showCreatePollPopup={showCreatePollPopup}
                 closeCreatePollPopup={handleCloseCreatePollPopup}
+                setAccessToken={setAccessToken}
+                loginEmail={loginEmail}
+                setLoginEmail={setLoginEmail}
                 />                       
 
                 
             </div>
          <div className="backgroundStyle" >
            
-            {isLogged ? (<> <div style={{height:"100vh"}}></div></>) : (
+            {isLogged ? (<></>) : (
             <>
             <div className="textBoxTestoasaContainer">
                 <p className="textBoxStyle"> {textBox} </p>
@@ -91,18 +129,26 @@ function LandingPage () {
             </div>
             </>)}
            
-         
           {isLogged ? (
-          <>
-            <div>
-              <Poll/>
-            </div>
-          </>) : (
+                  <>
+                  {pollIds.map((pollId) => (
+                    <div className="divParinte" key={pollId}>
+                      <Poll 
+                      pollTitle={pollData[pollId].title} 
+                      pollOptions={pollData[pollId].options} 
+                      pollId={pollId.index} />
+                      <Poll 
+                      pollTitle={pollData[pollId + 1].title} 
+                      pollOptions={pollData[pollId + 1].options} 
+                      pollId={pollId + 1} />
+                    </div>
+                  ))}
+                </>) : (
                 <>
                   {pollIds.map((pollId) => (
                     <div className="divParinte" key={pollId}>
-                      <Poll pollId={pollId} />
-                      <Poll pollId={pollId.index + 1} />
+                      <Poll pollTitle={""} pollOptions={""} pollId={pollId} />
+                      <Poll pollTitle={""} pollOptions={""} pollId={pollId.index + 1} />
                     </div>
                   ))}
                 </>)}

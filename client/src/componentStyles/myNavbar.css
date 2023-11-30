@@ -1,29 +1,32 @@
-.navbarTextStyle, button, button:focus {
-    color: #04395E !important;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 25px;
-    line-height: 26.63px;
-    margin-left: 25px;
-    margin-right: 20px;
-    align-items: center;
-    border: none;
-    outline: none;
-    background-color: transparent;
-  }
+.navbarTextStyle,
+button,
+button:focus {
+  color: #04395E !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 26.63px;
+  margin-left: 25px;
+  margin-right: 20px;
+  align-items: center;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
 
-  button:hover {
-    opacity: 0.6;
-  }
+button:hover {
+  opacity: 0.6;
+}
 
 .navbarImg {
-    margin-left: 15px;
-    margin-bottom: 5px;
-    size: auto;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  size: auto;
 }
 
 @media screen and (max-width: 768px) {
   .navbar-nav {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
@@ -38,4 +41,3 @@
     margin: 10px 0;
   }
 }
-
