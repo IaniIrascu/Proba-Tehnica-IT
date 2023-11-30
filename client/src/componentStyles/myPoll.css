@@ -1,9 +1,8 @@
 
 .myPerfectPoll {
     background-color: #FFFFFF;
-    width: 30%;
-    margin-left: 8%;
-    margin-right: 8%;
+    width: 50%;
+    height: 100%;
     border-radius: 30px;
     font-family: 'Inter', sans-serif;
     z-index: 0;
@@ -64,13 +63,22 @@ h5 {
   }
   
 
-  /* Media Queries for responsiveness */
-@media screen and (max-width: 768px) {
-  .myPerfectPoll {
-    width: 80%; /* Adjust the width for smaller screens */
-    margin-left: 5%;
-    margin-right: 5%;
+  @media screen and (max-width: 1200px) {
+    .myPerfectPoll {
+      width: 60%; 
+    }
   }
-
-
+  
+  @media screen and (max-width: 992px) {
+    .myPerfectPoll {
+      width: 70%; 
+  }
+  
+  @media screen and (max-width: 768px) {
+    .myPerfectPoll {
+      width: 80%; 
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+  }
 }

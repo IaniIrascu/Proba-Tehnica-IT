@@ -56,12 +56,11 @@ app.get('/users', (req, res) => {                             //get users
 app.get('/polls', (req, res) => {                              //get polls
   
   let polls = []
-
     db.collection('polls')
         .find()
         .forEach(poll => polls.push(poll)) 
         .then(() => {
-            res.status(200).json(polls)
+            res.status(200).json({polls})
         })
         .catch(() => {
             res.status(500).json({error: 'could not fetch'})
@@ -90,6 +89,30 @@ app.post('/userpolls' , authenticateToken, (req, res) => {                //get 
     .catch(() => {
         res.status(500).json({error: 'could not fetch'})
     })})
+
+
+    app.post('/otherpolls' , authenticateToken, (req, res) => {                //get polls of user
+      const { email } = req.body;
+    
+      let otherPolls = []
+      let pollCount = 0;
+    
+        db.collection('polls')
+        .find()
+        .forEach(otherPoll => {
+          if(otherPoll.email !== email) 
+            {
+              otherPolls.push(otherPoll)
+              pollCount++;
+            }
+    
+        }) 
+        .then(() => {
+            res.status(200).json({pollCount: pollCount, otherPolls})
+        })
+        .catch(() => {
+            res.status(500).json({error: 'could not fetch'})
+        })})
 
 
 

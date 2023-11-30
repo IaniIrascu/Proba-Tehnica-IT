@@ -35,10 +35,10 @@
   .divParinte {
     display: flex;
     flex-direction: row;
-    margin-right: 5%;
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
     justify-content: center;
+    width: 50%;
 }
 
 @media screen and (max-width: 768px) {

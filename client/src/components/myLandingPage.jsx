@@ -54,13 +54,37 @@ function LandingPage () {
       }
 
 
-      const [numberOfPolls, setNumberOfPolls] = useState(4);
+      const [otherPollData, setOtherPollData] = useState([""]);
+      const [numberOfOtherPolls, setNumberOfOtherPolls] = useState(4);
+
+      const displayOtherPolls = async () => {
+       
+        try {
+            const response = await fetch('http://localhost:3000/otherpolls', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+              },
+              body: JSON.stringify({ email: loginEmail }),
+            });
+      
+            const data = await response.json();
+            console.log('Request done!', data.pollCount, data.otherPolls);
+            setNumberOfOtherPolls(data.pollCount);
+            setOtherPollData(data.otherPolls);
+          } catch (error) {
+            console.error('Error getting other polls:', error);
+          }
+      }
+
+
+      const [numberOfMyPolls, setNumberOfMyPolls] = useState(4);
       const [accessToken, setAccessToken] = useState("");
       const [loginEmail, setLoginEmail] = useState("");
-      const [pollData, setPollData] = useState([""]);
+      const [myPollData, setMyPollData] = useState([""]);
 
-
-      const displayPolls = async () => {
+      const displayMyPolls = async () => {
        
         try {
             const response = await fetch('http://localhost:3000/userpolls', {
@@ -74,21 +98,29 @@ function LandingPage () {
       
             const data = await response.json();
             console.log('Request done!', data.pollCount, data.userPolls);
-            setNumberOfPolls(data.pollCount);
-            setPollData(data.userPolls);
+            setNumberOfMyPolls(data.pollCount);
+            setMyPollData(data.userPolls);
           } catch (error) {
-            console.error('Error getting polls:', error);
+            console.error('Error getting user polls:', error);
           }
       }
 
-        const pollIds = [];
 
-        for (let i = 0; i < numberOfPolls; i += 2) {
-          pollIds.push(i);
+        const myPollIds = [];
+       
+        for (let i = 0; i < numberOfMyPolls; i++) {
+          myPollIds.push(i);
         }      
+
+        const otherPollIds = [];
+        for(let j = 0; j < numberOfOtherPolls; j++) {
+          otherPollIds.push(j);
+        }
+
         useEffect(() => {
           if (isLogged) {
-            displayPolls();
+            displayMyPolls();
+            displayOtherPolls();
           }
         }, [isLogged, accessToken, loginEmail] );
 
@@ -130,28 +162,26 @@ function LandingPage () {
             </>)}
            
           {isLogged ? (
-                  <>
-                  {pollIds.map((pollId) => (
-                    <div className="divParinte" key={pollId}>
+                  <div style={{display:"flex", flexWrap:"wrap"}}>
+                  {myPollIds.map((myPollId) => (
+                    <div className="divParinte" key={myPollId}>
                       <Poll 
-                      pollTitle={pollData[pollId].title} 
-                      pollOptions={pollData[pollId].options} 
-                      pollId={pollId.index} />
-                      <Poll 
-                      pollTitle={pollData[pollId + 1].title} 
-                      pollOptions={pollData[pollId + 1].options} 
-                      pollId={pollId + 1} />
+                      pollTitle={myPollData[myPollId].title} 
+                      pollOptions={myPollData[myPollId].options} 
+                      pollId={myPollId} 
+                      />           
                     </div>
                   ))}
-                </>) : (
-                <>
-                  {pollIds.map((pollId) => (
-                    <div className="divParinte" key={pollId}>
-                      <Poll pollTitle={""} pollOptions={""} pollId={pollId} />
-                      <Poll pollTitle={""} pollOptions={""} pollId={pollId.index + 1} />
+                </div>) : (
+                <div style={{display:"flex", flexWrap:"wrap"}}>
+    
+                  {myPollIds.map((myPollId) => (
+                    <div className="divParinte" key={myPollId}>
+                      <Poll pollTitle={""} pollOptions={""} pollId={myPollId} />
                     </div>
                   ))}
-                </>)}
+
+                </div>)}
           </div>
 
             <div>
