@@ -64,12 +64,14 @@ h5 {
 
   .deleteButton {
     background-color: #04395E;
+    font-family: 'Inter', sans-serif;
     padding: 10%;
     margin-top: 120%;
     border-color: #04395E;
-    border-radius: 10%;
-    width: 120%;
+    border-radius: 7%;
+    width: 150%;
     color: #FFFFFF;
+    cursor: pointer;
   }
   
 

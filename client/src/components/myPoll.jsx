@@ -1,6 +1,13 @@
 import "../componentStyles/myPoll.css"
+import { useState } from "react";
 
 function Poll ( { pollTitle, pollOptions, pollId, isMyPoll, accessToken }) {
+
+const [selectedOption, setSelectedOption] = useState(null);
+
+const handleVote = () => {
+    console.log('Voting for option:', selectedOption);
+  };
 
 const handleDeletePoll = async () => {
             try {
@@ -32,28 +39,32 @@ const handleDeletePoll = async () => {
             <p className="myPerfectPoll">
                 <h1 className="textStyle">{pollTitle}</h1>
                 <h5>Make a choice:</h5>
-                <label class="radioContainer">
-                    <input type="radio" name={uniqueName}/>
-                    <span class="checkmark"/> {pollOptions[0]}
+                {pollOptions.map((option, index) => (
+                    <label key={index} className="radioContainer">
+                    <input
+                        type="radio"
+                        name={uniqueName}
+                        checked={index === selectedOption}
+                        onChange={() => setSelectedOption(index)}
+                    />
+                    <span className="checkmark" /> {option}
                     </label>
-                    <label class="radioContainer"> 
-                    <input type="radio" name={uniqueName}/>
-                    <span class="checkmark"/> {pollOptions[1]}
-                    </label>
-                    <label class="radioContainer">
-                    <input type="radio" name={uniqueName}/>
-                    <span class="checkmark"/> {pollOptions[2]}
-                </label>
+                ))}
+                <div style={{marginBottom:"30%"}}/>
+               
+                <div style={{display:"flex", flexDirection:"row"}}>
                 {isMyPoll ? (
-                <div>
-                <button
-                onClick={handleDeletePoll}>
-                    <p className="deleteButton">
-                        Delete
-                    </p>
-                </button>
+                    <button onClick={handleDeletePoll}>
+                        <p className="deleteButton">Delete</p>
+                    </button>     
+                     ) : (<></>)}
+                    <button 
+                    onClick={handleVote} 
+                    disabled={selectedOption === null}>
+                        <p className="deleteButton">Vote</p>
+                    </button>
+                   
                 </div>
-                ) : (<></>)}
             </p>
 )}
 
