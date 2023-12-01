@@ -4,13 +4,17 @@ import { useState } from "react";
 function Poll ( { pollTitle, pollOptions, pollId, isMyPoll, accessToken }) {
 
 const [selectedOption, setSelectedOption] = useState(null);
+const [hasVoted, setHasVoted] = useState(false);
+const [isDeleting, setIsDeleting] = useState(false);
 
 const handleVote = () => {
     console.log('Voting for option:', selectedOption);
+    setHasVoted(true);
   };
 
 const handleDeletePoll = async () => {
             try {
+              setIsDeleting(true);
               const response = await fetch(`http://localhost:3000/delete-poll`, {
                 method: 'DELETE',
                 headers: {
@@ -27,6 +31,9 @@ const handleDeletePoll = async () => {
               }
             } catch (error) {
               console.error('Error:', error);
+            } finally {
+              window.alert("Poll deleted successfully!");
+              setIsDeleting(false);
             };
     }
 
@@ -36,7 +43,7 @@ const handleDeletePoll = async () => {
         pollOptions = ["Un lenes", "O testoasa", "Un elefant"]
     const uniqueName = `radio_${pollId}`;
     return(
-            <p className="myPerfectPoll">
+            <div className="myPerfectPoll">
                 <h1 className="textStyle">{pollTitle}</h1>
                 <h5>Make a choice:</h5>
                 {pollOptions.map((option, index) => (
@@ -45,27 +52,35 @@ const handleDeletePoll = async () => {
                         type="radio"
                         name={uniqueName}
                         checked={index === selectedOption}
-                        onChange={() => setSelectedOption(index)}
+                        onChange={() => !hasVoted && setSelectedOption(index)}
+                        disabled={hasVoted}
                     />
                     <span className="checkmark" /> {option}
                     </label>
                 ))}
-                <div style={{marginBottom:"30%"}}/>
+                <div style={{marginBottom:"25%"}}/>
                
-                <div style={{display:"flex", flexDirection:"row"}}>
+                <div className="divPoll">
                 {isMyPoll ? (
                     <button onClick={handleDeletePoll}>
-                        <p className="deleteButton">Delete</p>
+                        <div className="deleteButton">{isDeleting ? "Deleting..." : "Delete"}</div>
                     </button>     
                      ) : (<></>)}
+                      {selectedOption !== null && (
                     <button 
-                    onClick={handleVote} 
-                    disabled={selectedOption === null}>
-                        <p className="deleteButton">Vote</p>
+                      className="delete"
+                      onClick={handleVote}
+                      style={{
+                        marginLeft: "auto",
+                        marginRight: "10%"
+                      }}
+                      disabled={hasVoted}
+                    >
+                      <div className="deleteButton">Vote</div>
                     </button>
-                   
+                  )}
                 </div>
-            </p>
+            </div>
 )}
 
 export default Poll;

@@ -1,17 +1,18 @@
 
 .myPerfectPoll {
     background-color: #FFFFFF;
-    width: 50%;
+    width: 60%;
     height: 100%;
     border-radius: 30px;
     font-family: 'Inter', sans-serif;
     z-index: 0;
-    padding-bottom: 2%;
+    padding-bottom: 5%;
 }
 
 .textStyle {
     margin-left: 5%;
     margin-top: 30px;
+    margin-right: 20%;
     font-size: 30px;
 }
 
@@ -42,6 +43,9 @@ h5 {
     cursor: pointer;
     z-index: 0;
   }
+  .radioContainer:hover input:disabled ~ .checkmark {
+    cursor: default;
+  }
   
   .checkmark {
     width: 3vh;
@@ -56,6 +60,10 @@ h5 {
   .radioContainer:hover input ~ .checkmark {
     background-color: #ccc;
   }
+
+  .radioContainer:hover input ~ .checkmark{
+    background-color: #FFFFFF;
+  }
   
   .radioContainer input:checked ~ .checkmark {
     background-color: #04395E;
@@ -65,8 +73,8 @@ h5 {
   .deleteButton {
     background-color: #04395E;
     font-family: 'Inter', sans-serif;
-    padding: 10%;
-    margin-top: 120%;
+    padding: 7px;
+    margin-top: 100%;
     border-color: #04395E;
     border-radius: 7%;
     width: 150%;
@@ -74,23 +82,40 @@ h5 {
     cursor: pointer;
   }
   
+  .delete:disabled {
+    opacity: 0.5;
+    :hover {
+      cursor: default;
+      background-color: #04395E;
+    }
+  }
+
+  .divPoll {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: baseline;
+  }
 
   @media screen and (max-width: 1200px) {
     .myPerfectPoll {
-      width: 60%; 
+      width: 70%; 
     }
   }
   
   @media screen and (max-width: 992px) {
     .myPerfectPoll {
-      width: 70%; 
+      width: 80%; 
+    }
   }
   
   @media screen and (max-width: 768px) {
     .myPerfectPoll {
-      width: 80%; 
+      width: 100%; 
       margin-left: 5%;
       margin-right: 5%;
     }
+    .deleteButton {
+      width: auto;
+    }
   }
-}

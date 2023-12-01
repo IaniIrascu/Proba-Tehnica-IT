@@ -166,7 +166,7 @@ function LandingPage () {
             </>)}
            
           {isLogged ? (
-                  <div style={{display:"flex", flexWrap:"wrap"}}>
+                  <div style={{display:"flex", flexWrap:"wrap", minHeight:"100vh"}}>
                   {myPollIds.map((myPollId) => (
                     <div className="divParinte" key={myPollId}>
                       <Poll 
