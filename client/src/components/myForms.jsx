@@ -64,7 +64,7 @@ setAccessToken, loginEmail, setLoginEmail }) {
             
             console.log('Form submitted successfully');
             e.preventDefault()
-            fetch('http://localhost:3000/register-user', {
+            fetch('http://localhost:5000/register-user', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
@@ -96,7 +96,7 @@ setAccessToken, loginEmail, setLoginEmail }) {
             const obj = {"email": loginEmail,
                          "password": loginPassword }
 
-            const response = await fetch('http://localhost:3000/check-user', {
+            const response = await fetch('http://localhost:5000/check-user', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -143,7 +143,7 @@ setAccessToken, loginEmail, setLoginEmail }) {
         "title": pollTitle,
         "options": pollOptions,
     }
-        const response = await fetch('http://localhost:3000/create-poll', {
+        const response = await fetch('http://localhost:5000/create-poll', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

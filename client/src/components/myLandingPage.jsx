@@ -60,7 +60,7 @@ function LandingPage () {
       const displayOtherPolls = async () => {
        
         try {
-            const response = await fetch('http://localhost:3000/otherpolls', {
+            const response = await fetch('http://localhost:5000/otherpolls', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function LandingPage () {
       const displayMyPolls = async () => {
        
         try {
-            const response = await fetch('http://localhost:3000/userpolls', {
+            const response = await fetch('http://localhost:5000/userpolls', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ function LandingPage () {
             displayMyPolls();
             displayOtherPolls();
           }
-        }, [isLogged, accessToken, loginEmail ] );
+        }, [isLogged, accessToken, loginEmail] );
 
     return (
       <div className="landingPageContent">

@@ -15,7 +15,7 @@ const handleVote = () => {
 const handleDeletePoll = async () => {
             try {
               setIsDeleting(true);
-              const response = await fetch(`http://localhost:3000/delete-poll`, {
+              const response = await fetch(`http://localhost:5000/delete-poll`, {
                 method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json',
