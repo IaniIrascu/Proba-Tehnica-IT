@@ -74,7 +74,6 @@ h5 {
     background-color: #04395E;
     font-family: 'Inter', sans-serif;
     padding: 7px;
-    margin-top: 100%;
     border-color: #04395E;
     border-radius: 7%;
     width: 150%;
@@ -107,6 +106,7 @@ h5 {
     .myPerfectPoll {
       width: 80%; 
     }
+    
   }
   
   @media screen and (max-width: 768px) {
@@ -117,5 +117,8 @@ h5 {
     }
     .deleteButton {
       width: auto;
+    }
+    .textStyle {
+      font-size: 25px;
     }
   }

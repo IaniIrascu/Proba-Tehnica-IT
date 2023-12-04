@@ -1,11 +1,10 @@
-.landingPageContainer {
-  position: relative;
-  min-height: 100vh;
-}
+
+
 .backgroundStyle {
   background-image: url('../pngs/landingPageBg.png');
   background-size: cover;
   height: 100%;
+  width: 100%;
 }
 
 .stickyNavbar {
@@ -42,6 +41,12 @@
     height: fit-content;
 }
 
+@media screen and (max-width: 1150px) {
+  .textBoxTestoasaContainer {
+    flex-direction: column;
+    margin: 5% 5%;
+  }
+}
 @media screen and (max-width: 768px) {
   /* Adjustments for smaller screens */
   .textBoxTestoasaContainer {

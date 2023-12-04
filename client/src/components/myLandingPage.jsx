@@ -34,7 +34,10 @@ function LandingPage () {
         setShowLoginPopup(false);
       }
 
-      const [isLogged, setIsLogged] = useState(false);
+      const [isLogged, setIsLogged] = useState(() => {
+        const loginData = localStorage.getItem('isLogged');
+        return loginData ? JSON.parse(loginData) : false;
+      });
 
       const handleLoginSuccess = () => {
         setIsLogged(true);
@@ -53,7 +56,10 @@ function LandingPage () {
         setShowCreatePollPopup(false);
       }
 
-      const [accessToken, setAccessToken] = useState("");
+      const [accessToken, setAccessToken] = useState(() => {
+        const accessData = localStorage.getItem('accessToken');
+        return accessData ? JSON.parse(accessData) : "";
+      });
       const [otherPollData, setOtherPollData] = useState([""]);
       const [numberOfOtherPolls, setNumberOfOtherPolls] = useState();
 
@@ -79,6 +85,13 @@ function LandingPage () {
           }
       }
 
+      useEffect(() => {
+        localStorage.setItem('accessToken', JSON.stringify(accessToken));
+      }, [accessToken]);
+      
+      useEffect(() => {
+        localStorage.setItem('isLogged', JSON.stringify(isLogged));
+      }, [isLogged]);
 
       const [numberOfMyPolls, setNumberOfMyPolls] = useState();
       const [loginEmail, setLoginEmail] = useState("");
@@ -120,16 +133,17 @@ function LandingPage () {
         for(let j = 0; j < numberOfOtherPolls; j++) {
           otherPollIds.push(j);
         }
+        
 
         useEffect(() => {
           if (isLogged) {
             displayMyPolls();
             displayOtherPolls();
           }
-        }, [isLogged, accessToken, loginEmail] );
+        }, [isLogged] );
 
     return (
-      <div className="landingPageContent">
+      <div className="backgroundStyle">
         
           <div className="stickyNavbar"> 
                 <Navbar 
@@ -155,7 +169,7 @@ function LandingPage () {
 
                 
             </div>
-         <div className="backgroundStyle" >
+         
            
             {isLogged ? (<></>) : (
             <>
@@ -198,7 +212,7 @@ function LandingPage () {
                   ))}
 
                 </div>)}
-          </div>
+
 
             <div>
               <Footer/>

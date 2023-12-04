@@ -2,6 +2,7 @@ import logo from "../pngs/logoPollIt.png";
 import '../componentStyles/myNavbar.css';
 import { useState, useRef, useEffect } from "react";
 
+
 function Navbar( { onCreatePollClick, onLogoutClick, onRegisterClick, onLoginClick, isLogged }) {
 
   const onRegisterClickRef = useRef(null);
