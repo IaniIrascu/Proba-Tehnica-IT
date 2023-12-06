@@ -69,8 +69,12 @@ setAccessToken, loginEmail, setLoginEmail }) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
         })
-        .then(() => {
-            console.log('new user added');
+        .then(response => response.json())
+        .then(response => {
+            if(response.success === true)
+              console.log("user registered");
+            else
+              window.alert(response.message);
             setIsRegistering(false);
         })
     } else {

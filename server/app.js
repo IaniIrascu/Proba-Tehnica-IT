@@ -120,11 +120,19 @@ app.post('/register-user', async (req, res) => {                       //registe
     const { email, password } = req.body;
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
+
+      const exists = await db.collection('users').findOne({ email });
+
+      if(exists) {
+        return res.status(403).json({ message: 'User already exists! Consider logging in!' });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
     
-        await db.collection('users').insertOne({ email, password: hashedPassword });
-    
-        res.json({ success: true });
+      await db.collection('users').insertOne({ email, password: hashedPassword });
+  
+      res.status(201).json({ success: true });
+
       } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -136,6 +144,7 @@ app.post('/register-user', async (req, res) => {                       //registe
     const { email, title, options } = req.body;
     
      try {
+
         const result = await db.collection('polls').insertOne({ email, title, options });
   
         res.status(201).json(result);
